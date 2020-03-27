@@ -1,17 +1,17 @@
 package flashcards;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+//        for (String item : args) {
+//            switch (item) {
+//                case "-import": break;
+//                case "-export": break;
+//            }
+//        }
+
         Input input = Input.getInstance();
-//        input.logOff();
-//        Cards cards = importCards("test.txt");
-//        input.logOn();
         Cards cards = new Cards();
         while (true) {
             String action = input.getString("\nInput the action (" +

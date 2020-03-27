@@ -109,7 +109,7 @@ public class Cards {
             } else {
                 item.incrementMistakes();
                 int index = containsDefinition(answer);
-                if (index > 0) {
+                if (index >= 0) {
                     input.addLog("Wrong answer. The correct one is \""
                             + item.getDefinition()
                             + "\" you've just written the definition of \""
