@@ -36,9 +36,13 @@ public class Cards {
         return -1;
     }
 
+    public void put(String term, String definition, String mistakes) {
+        put(term, definition, Integer.parseInt(mistakes));
+    }
+
     public void put(String term, String definition, int mistakes) {
         int index = containsTerm(term);
-        if (index > 0) {
+        if (index >= 0) {
             list.get(index).setDefinition(definition);
             list.get(index).setMistakes(mistakes);
         } else {
@@ -49,12 +53,12 @@ public class Cards {
     public void add() {
         Input input = Input.getInstance();
         String term = input.getString("The card : ");
-        if (containsTerm(term) > 0) {
+        if (containsTerm(term) >= 0) {
             input.addLog("The card \"" + term + "\" already exists.");
             return;
         }
         String definition = input.getString("The definition of the card : ");
-        if (containsDefinition(definition) > 0) {
+        if (containsDefinition(definition) >= 0) {
             input.addLog("The definition \"" + definition + "\" already exists.");
             return;
         }
@@ -66,7 +70,7 @@ public class Cards {
         Input input = Input.getInstance();
         String term = input.getString("The card : ");
         int index = containsTerm(term);
-        if (index > 0) {
+        if (index >= 0) {
             list.remove(index);
             input.addLog("The card has been removed.");
         } else {

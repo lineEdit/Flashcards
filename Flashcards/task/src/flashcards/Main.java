@@ -1,7 +1,9 @@
 package flashcards;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -60,14 +62,12 @@ public class Main {
         Cards cards = new Cards();
         Input input = Input.getInstance();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            while (true) {
-                String line1 = reader.readLine();
-                String line2 = reader.readLine();
-                String line3 = reader.readLine();
-                if (line1 == null || line2 == null || line3 == null) {
-                    break;
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] stringList = line.split(":");
+                if (stringList.length == 3) {
+                    cards.put(stringList[0], stringList[1], stringList[2]);
                 }
-                cards.put(line1, line2, Integer.parseInt(line3));
             }
             input.addLog(cards.size() + " cards have been loaded.");
         } catch (FileNotFoundException e) {

@@ -3,9 +3,9 @@ package flashcards;
 public class Card {
     String term;
     String definition;
-    String mistakes;
+    int mistakes;
 
-    public Card(String term, String definition, String mistakes) {
+    public Card(String term, String definition, int mistakes) {
         this.term = term;
         this.definition = definition;
         this.mistakes = mistakes;
@@ -27,11 +27,24 @@ public class Card {
         this.definition = definition;
     }
 
-    public String getMistakes() {
+    public int getMistakes() {
         return mistakes;
     }
 
-    public void setMistakes(String mistakes) {
+    public void setMistakes(int mistakes) {
         this.mistakes = mistakes;
+    }
+
+    public void incrementMistakes() {
+        ++mistakes;
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "term='" + term + '\'' +
+                ", definition='" + definition + '\'' +
+                ", mistakes=" + mistakes +
+                '}';
     }
 }
