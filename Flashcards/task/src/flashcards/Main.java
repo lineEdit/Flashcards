@@ -1,18 +1,28 @@
 package flashcards;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-//        for (String item : args) {
-//            switch (item) {
-//                case "-import": break;
-//                case "-export": break;
-//            }
-//        }
-
-        Input input = Input.getInstance();
         Cards cards = new Cards();
+        Input input = Input.getInstance();
+
+//        Parse Args
+        Map<String, String> mapArgs = new HashMap<>();
+        if (args.length == 2) {
+            mapArgs.put(args[0], args[1]);
+        }
+        if (args.length == 4) {
+            mapArgs.put(args[0], args[1]);
+            mapArgs.put(args[2], args[3]);
+        }
+//        Activate import Args
+        if (mapArgs.containsKey("-import")) {
+            cards = importCards(mapArgs.get("-import"));
+        }
+
         while (true) {
             String action = input.getString("\nInput the action (" +
                     "add, " +
@@ -31,7 +41,13 @@ public class Main {
                 case "import": cards = importCards(input.getString("File name: ")); break;
                 case "export": exportCards(cards, input.getString("File name: ")); break;
                 case "ask": cards.ask(); break;
-                case "exit": input.addLog("Bye bye!"); return;
+                case "exit":
+                    input.addLog("Bye bye!");
+//        Activate export Args
+                    if (mapArgs.containsKey("-export")) {
+                        exportCards(cards, mapArgs.get("-export"));
+                    }
+                    return;
                 case "log": writeLogInFile(input.getString("File name: ")); break;
                 case "hardest card": cards.hardestCard(); break;
                 case "reset stats": cards.resetStats(); break;
